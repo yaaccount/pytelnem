@@ -1,5 +1,7 @@
+(work in progress; guide needs verification)
+
 # pytelnem
-Telegram bot = python cgi with sqlite + javascript nem-sdk over zerorpc
+Telegram bot = python python-pip cgi with sqlite + javascript nem-sdk over zerorpc
 
 ### Disclaimer:
 * I am not planning to develop this further beyond bug fixing. It is quick and dirty code finished in a hurry and it seems to be serving its purpose well. For new features, I would recommend to write this from scratch using different technologies - https://github.com/aleixmorgadas/nem-library-ts and https://github.com/felipebergamin/api-telegram-bot are easy to integrate (+ lighttpd mod_proxy to forward https from 443 to 3000)
@@ -8,7 +10,8 @@ Telegram bot = python cgi with sqlite + javascript nem-sdk over zerorpc
 * telegram webhook requires https
 
 ### Ubuntu 16.04 prerequisities:
-    $ sudo apt-get install lighttpd python nodejs-legacy
+    $ sudo apt-get install lighttpd python nodejs-legacy npm
+    $ sudo pip install requests zerorpc
 
 ### lighttpd config
 * **enable cgi for python**
@@ -60,4 +63,38 @@ Telegram bot = python cgi with sqlite + javascript nem-sdk over zerorpc
       $ sudo /etc/init.d/lighttpd force-reload
 
 #### Checkpoint 2: navigate to https://yourdomain/cgi-bin/telegram/hello-world.py, see if it works
+
+### checkout, configure, run bot
+
+* **checkout**
+
+      $ cd
+      $ git clone https://github.com/yaaccount/pytelnem
+      $ sudo chown -R www-data:www-data logs db
+      $ cd /var/www/html/cgi-bin/
+      $ mv telegram hello-world
+      $ ln -s /home/myusername/pytelnem
+
+* **install python dependencies**
+      $ sudo pip install requests
+
+* **install node/npm dependencies**
+      $ cd /home/myusername/pytelnem
+      $ npm install nem-sdk zerorpc
+
+* **configure nem101bot.py**
+
+    -- open it, set your telegram bot token, public ip and admin password
+
+* **run signing service**
+
+    -- inside "screen" session:
+      $ screen
+      $ node nemsdk-over-zerorpc.js
+
+    -- <ctrl+a><ctrl+d> (detaches from the screen session)
+    -- $ screen -rd (reconnect to live screen session)
+
+    -- input your wallet - content of .wlt (base64 string)
+    -- input your wallet password
 
