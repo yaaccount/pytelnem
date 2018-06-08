@@ -10,7 +10,7 @@ Telegram bot = python python-pip cgi with sqlite + javascript nem-sdk over zeror
 * telegram webhook requires https
 
 ### Ubuntu 16.04 prerequisities:
-    $ sudo apt-get install lighttpd python nodejs-legacy npm
+    $ sudo apt-get install lighttpd python python-pip nodejs-legacy npm
     $ sudo pip install requests zerorpc
 
 ### lighttpd config
@@ -30,17 +30,21 @@ Telegram bot = python python-pip cgi with sqlite + javascript nem-sdk over zeror
       
     -- prepare cgi folder
 
-      $ sudo mkdir -p /var/www/html/cgi-bin/telegram
+      $ mkdir /home/myusername/telegram
+      $ sudo mkdir -p /var/www/html/cgi-bin
+      $ cd /var/www/html/cgi-bin
+      $ sudo ln -s /home/mysuername/telegram telegram
 
-    -- create /var/www/html/cgi-bin/telegram/hello-world.py
+    -- create /home/myusername/telegram/hello-world.py
 
+      #!/usr/bin/python
+      
       print("Content-Type: text/html\n")
       print("<html><head><title>Test</title></head><body>Hello world!</body></html>")
 
     -- set rights
 
-      $ sudo chown -R www-data:www-data /var/www/html/cgi-bin/telegram
-      $ sudo chmod a+x /var/www/html/cgi-bin/telegram/hello-world.py
+      $ chmod a+x /home/myusername/telegram/hello-world.py
 
 #### Checkpoint 1: navigate to http://yourdomain/cgi-bin/telegram/hello-world.py, see if it works
 
@@ -73,12 +77,14 @@ Telegram bot = python python-pip cgi with sqlite + javascript nem-sdk over zeror
       $ sudo chown -R www-data:www-data logs db
       $ cd /var/www/html/cgi-bin/
       $ mv telegram hello-world
-      $ ln -s /home/myusername/pytelnem
+      $ ln -s /home/myusername/pytelnem telegram
 
 * **install python dependencies**
+
       $ sudo pip install requests
 
 * **install node/npm dependencies**
+
       $ cd /home/myusername/pytelnem
       $ npm install nem-sdk zerorpc
 
@@ -89,12 +95,14 @@ Telegram bot = python python-pip cgi with sqlite + javascript nem-sdk over zeror
 * **run signing service**
 
     -- inside "screen" session:
+
       $ screen
       $ node nemsdk-over-zerorpc.js
 
     -- <ctrl+a><ctrl+d> (detaches from the screen session)
+
     -- $ screen -rd (reconnect to live screen session)
 
     -- input your wallet - content of .wlt (base64 string)
-    -- input your wallet password
 
+    -- input your wallet password
