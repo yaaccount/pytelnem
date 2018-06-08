@@ -4,7 +4,7 @@ import requests, json
 
 TOKEN = None
 URL = None
-PUBLIC_KEY = '/etc/lighttpd/certs/public.pem'
+PUBLIC_KEY = None
 WEBHOOK_URL = None
 
 class Method:
