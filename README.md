@@ -10,8 +10,9 @@ Telegram bot = python python-pip cgi with sqlite + javascript nem-sdk over zeror
 * telegram webhook requires https
 
 ### Ubuntu 16.04 prerequisities:
-    $ sudo apt-get install lighttpd python python-pip nodejs-legacy npm
+    $ sudo apt-get install lighttpd python python-pip nodejs-legacy npm libzmq-dev
     $ sudo pip install requests zerorpc
+    $ sudo npm install -g node-gyp
 
 ### lighttpd config
 * **enable cgi for python**
@@ -70,39 +71,38 @@ Telegram bot = python python-pip cgi with sqlite + javascript nem-sdk over zeror
 
 ### checkout, configure, run bot
 
+* **telegram**
+
+    -- define your bot via telegram (talk to @BotFather), get the TOKEN
+
 * **checkout**
 
-      $ cd
+      $ cd ~/telegram
       $ git clone https://github.com/yaaccount/pytelnem
+      $ cd pytelnem
       $ sudo chown -R www-data:www-data logs db
-      $ cd /var/www/html/cgi-bin/
-      $ mv telegram hello-world
-      $ ln -s /home/myusername/pytelnem telegram
-
-* **install python dependencies**
-
-      $ sudo pip install requests
 
 * **install node/npm dependencies**
 
-      $ cd /home/myusername/pytelnem
-      $ npm install nem-sdk zerorpc
+      $ cd /home/myusername/telegram/pytelnem
+      $ npm install nem-sdk zerorpc readline-sync
 
 * **configure nem101bot.py**
 
-    -- open it, set your telegram bot token, public ip and admin password
+    -- open it, set your telegram bot TOKEN, public ip and admin mode password
 
-* **run signing service**
+* **run tx signing service**
 
     -- inside "screen" session:
 
       $ screen
       $ node nemsdk-over-zerorpc.js
 
-    -- <ctrl+a><ctrl+d> (detaches from the screen session)
-
-    -- $ screen -rd (reconnect to live screen session)
-
     -- input your wallet - content of .wlt (base64 string)
 
     -- input your wallet password
+
+    -- <ctrl+a><ctrl+d> (detaches from the screen session)
+
+    -- Note: later, you can always reconnect to live screen session using "screen -rd" and terminate the tx service by "<ctrl+c>"
+
