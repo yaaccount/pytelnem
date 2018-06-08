@@ -8,16 +8,17 @@ import Nis
 telegramAPI.TOKEN = 'YOUR_TOKEN_GOES_HERE'
 telegramAPI.URL = 'https://api.telegram.org/bot' + telegramAPI.TOKEN
 telegramAPI.WEBHOOK_URL = 'https://YOUR_IP_OR_DOMAIN_GOES_HERE/cgi-bin/telegram/nem101bot.py'
-telegramAPI.PUBLIC_KEY = '/etc/lighttpd/certs/public.pem'
 ADMIN_TOKEN = 'YOUR_ADMIN_PASSORD_GOES_HERE' #TODO:
 
 ENABLED = True
 DEBUGMODE = False
 MINANSWERS = 3
 
-#m = telegramAPI.SetWebhook()
-#m.invoke()
-#sys.exit()
+# uncomment and call once from commandline to upload your certificate to telegram server (python nem101bot.py)
+# telegramAPI.PUBLIC_KEY = '/etc/lighttpd/certs/public.pem' # only used during telegrmAPI.SetWebhook()
+# m = telegramAPI.SetWebhook()
+# m.invoke()
+# sys.exit()
 
 received = sys.stdin.read()
 
