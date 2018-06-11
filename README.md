@@ -1,7 +1,7 @@
 (work in progress; guide needs verification)
 
 # pytelnem
-Telegram bot = python python-pip cgi with sqlite + javascript nem-sdk over zerorpc
+Telegram bot = python cgi with sqlite + javascript nem-sdk over zerorpc
 
 ### Disclaimer:
 * I am not planning to develop this further beyond bug fixing. It is quick and dirty code finished in a hurry and it seems to be serving its purpose well. For new features, I would recommend to write this from scratch using different technologies - https://github.com/aleixmorgadas/nem-library-ts and https://github.com/felipebergamin/api-telegram-bot are easy to integrate (+ lighttpd mod_proxy to forward https from 443 to 3000)
